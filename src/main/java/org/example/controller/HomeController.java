@@ -15,4 +15,9 @@ public class HomeController {
     public String welcome(){
         return "welcome";
     }
+
+    @RequestMapping("/profile")
+    public String userProfile() {
+        return "profile";
+    }
 }
