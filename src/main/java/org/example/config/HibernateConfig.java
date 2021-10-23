@@ -49,13 +49,12 @@ public class HibernateConfig {
     private Properties hibernateProperties() {
         Properties hibernateProperties = new Properties();
 
-//        hibernateProperties.setProperty(
-//                "hibernate.hbm2ddl.auto", "update");
+        hibernateProperties.setProperty(
+                "hibernate.hbm2ddl.auto", "update");
         hibernateProperties.setProperty(
                 "hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
-        hibernateProperties.setProperty(
-                "hibernate.hbm2ddl.auto", "create"
-        );
+//        hibernateProperties.setProperty(
+//                "hibernate.hbm2ddl.auto", "create");
         hibernateProperties.setProperty(
                 "hibernate.current_session_context_class", "thread");
         hibernateProperties.setProperty("hibernate.show_sql", "true");
