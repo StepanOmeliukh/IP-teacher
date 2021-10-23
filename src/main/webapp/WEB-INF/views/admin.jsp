@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Home - Brand</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/profile.css">
+    <title>Home - IP-Teacher</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/fonts/font-awesome.min.css">
@@ -13,10 +13,10 @@
 
 <body id="page-top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="72">
     <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-secondary text-uppercase" id="mainNav">
-        <div class="container"><a class="navbar-brand" href="#page-top">IP-teacher</a><button data-bs-toggle="collapse" data-bs-target="#navbarResponsive" class="navbar-toggler text-white bg-primary navbar-toggler-right text-uppercase rounded" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+        <div class="container"><a class="navbar-brand" href="#page-top">IP-Teacher</a><button data-bs-toggle="collapse" data-bs-target="#navbarResponsive" class="navbar-toggler text-white bg-primary navbar-toggler-right text-uppercase rounded" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#portfolio">Profile</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#portfolio">Admin</a></li>
                     <li class="nav-item mx-0 mx-lg-1"></li>
                     <li class="nav-item mx-0 mx-lg-1"></li>
                 </ul>
@@ -24,76 +24,48 @@
         </div>
     </nav>
     <header class="text-center text-white bg-primary masthead">
-        <div class="container"><img class="img-fluid d-block mx-auto mb-5" src="assets/img/profile.png">
-            <h1>Stepan Omeliukh</h1>
-            <h1 style="font-size: 20px;">stepan.omeliukh.knm.2019@lpnu.ua</h1>
+        <div class="container"><img class="img-fluid d-block mx-auto mb-5" src="../../../../../../IP-Teacher%20Bootstrap/Admin/assets/img/profile.png">
+            <h1>John Doe</h1>
+            <h1 style="font-size: 20px;">admin.mail@gmail.com</h1>
             <hr class="star-light">
-        </div><a class="btn btn-outline-light btn-xl" role="button" href="#"><i class="fa fa-refresh me-2"></i><span>Change password!</span></a>
+            <h2 class="font-weight-light mb-0">Admin</h2>
+        </div>
     </header>
     <section id="portfolio" class="portfolio">
         <div class="container">
-            <h2 class="text-uppercase text-center text-secondary"><strong>profile info</strong></h2>
+            <h2 class="text-uppercase text-center text-secondary">Users</h2>
             <hr class="star-dark mb-5">
             <div class="row">
-                <div class="col">
-                    <div class="dropdown"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="width: 180px;margin-left: 220px;">List of topics&nbsp;&nbsp;</button>
-                        <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="dropdown"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="width: 180px;margin-left: 60px;">Points&nbsp;</button>
-                        <div class="dropdown-menu"><a class="dropdown-item" href="#">Topic #1</a><a class="dropdown-item" href="#">Topic #2</a><a class="dropdown-item" href="#">Topic #3</a></div>
-                    </div>
-                </div>
-            </div>
-            <div class="row" style="margin-top: 20px;">
-                <div class="col">
-                    <h1>Topic #</h1>
-                    <p>Paragraph</p>
-                </div>
-                <div class="col">
-                    <h1>Topic#</h1>
-                    <p>Points...</p>
-                </div>
+                <div class="col"><input type="search" style="transform: translate(0px);width: 300px;" placeholder="Users search..."><i class="fa fa-search" style="transform: translate(-25px);"></i></div>
             </div>
         </div>
-    </section>
-    <section class="text-white bg-primary mb-0" id="about" style="height: 350px;">
-        <div class="container">
-            <h2 class="text-uppercase text-center text-white">About</h2>
-            <hr class="star-light mb-5">
-            <div class="row">
-                <div class="col">
-                    <p class="lead">Freelancer is a free bootstrap theme. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional LESS stylesheets for easy customization.</p>
-                </div>
-            </div>
-            <div class="text-center mt-4"></div>
-        </div>
-    </section>
-    <section id="contact">
-        <div class="container">
-            <h2 class="text-uppercase text-center text-secondary mb-0">Contact Me</h2>
-            <hr class="star-dark mb-5">
-            <div class="row">
-                <div class="col-lg-8 mx-auto">
-                    <form id="contactForm" name="sentMessage" novalidate="novalidate">
-                        <div class="control-group">
-                            <div class="mb-0 form-floating controls pb-2"><input class="form-control" type="text" id="name" required="" placeholder="Name"><label class="form-label">Name</label><small class="form-text text-danger help-block"></small></div>
-                        </div>
-                        <div class="control-group">
-                            <div class="mb-0 form-floating controls pb-2"><input class="form-control" type="email" id="email" required="" placeholder="Email Address"><label class="form-label">Email Address</label><small class="form-text text-danger help-block"></small></div>
-                        </div>
-                        <div class="control-group">
-                            <div class="mb-0 form-floating controls pb-2"><input class="form-control" type="tel" id="phone" required="" placeholder="Phone Number"><label class="form-label">Phone Number</label><small class="form-text text-danger help-block"></small></div>
-                        </div>
-                        <div class="control-group">
-                            <div class="mb-5 form-floating controls pb-2"><textarea class="form-control" id="message" required="" placeholder="Message" style="height: 150px;"></textarea><label class="form-label">Message</label><small class="form-text text-danger help-block"></small></div>
-                        </div>
-                        <div id="success"></div>
-                        <div><button class="btn btn-primary btn-xl" id="sendMessageButton" type="submit">Send</button></div>
-                    </form>
-                </div>
-            </div>
+        <div class="col" style="margin-top: 20px;">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th style="width: 300px;">User's mail</th>
+                            <th>User's name</th>
+                            <th>User's tries</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>admin.mail@gmail.com</td>
+                            <td>John Doe</td>
+                            <td><input type="text"></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>stepan.omeliukh.knm.2019@lpnu.ua</td>
+                            <td>Stepan Omeliukh</td>
+                            <td><input type="text"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div><a class="btn btn-outline-light btn-xl" role="button" href="#" style="background: rgb(24,188,156);text-align: center;margin-left: 40%;"><i class="fa fa-plus me-2"></i><span>Add tries</span></a>
         </div>
     </section>
     <div class="text-center text-white copyright py-4">
@@ -214,7 +186,7 @@
             </div>
         </div>
     </div>
-    <script src="${pageContext.request.contextPath}/resources/js/profile.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/admin.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/freelancer.js"></script>
 </body>
 
