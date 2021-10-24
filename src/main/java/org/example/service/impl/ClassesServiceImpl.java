@@ -1,6 +1,9 @@
 package org.example.service.impl;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.example.service.ClassesService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,27 +13,32 @@ import java.util.Iterator;
 import java.util.Random;
 
 @Service
+@Getter
+@Setter
 public class ClassesServiceImpl implements ClassesService {
 
 //    @Autowired
 //    private ClassesRepo classesRepo;
 
     private Integer[] currentIPv4 = new Integer[4];
-    public Integer prefix = 0;
-    public String ipPrefix = "";
-    public String ipClass = "";
-    public Double numberOfHosts = 0.0;
+    private Integer prefix = 0;
+    private String ipPrefix = "";
+    private String ipClass = "";
+    private Double numberOfHosts = 0.0;
 
-    public String ipNetmask = "";
-    public String ipInverseMask = "";
-    public String netAddr = "";
-    public String hostAddr = "";
-    public String netAddrBin = "";
+    private String ipNetmask = "";
+    private String ipInverseMask = "";
+    private String netAddr = "";
+    private String hostAddr = "";
+    private String netAddrBin = "";
 
     private static final String tmp = "00000000000000000000000000000000";
 
-    public String minAddr = "";
-    public String broadcastingAddr = "";
+    private String minAddr = "";
+    private String maxAddr = "";
+    private String broadcastingAddr = "";
+
+    private static final Integer maxRate = 10;
 
     @Override
     @Transactional
@@ -40,10 +48,26 @@ public class ClassesServiceImpl implements ClassesService {
 
     @Override
     @Transactional
-    public String genIPv4(String classification, String check) {
+    public String checkAnswers(String[] taskArray) {
+        String[] values = getAllValues();
+        Integer rate = 0;
+
+        for (int i = 0; i < taskArray.length; i++)
+            if (taskArray[i].equals(values[i]))
+                rate++;
+
+        rate = (int)(((double)rate / maxRate) * 100);
+
+        return rate.toString() + "%";
+    }
+
+    @Override
+    @Transactional
+    public String genIPv4(String classification, boolean check) {
         Random random = new Random();
         String ipText = "";
         Integer maxNum;
+
 
         if (classification.equals("CLASSES"))
             maxNum = 223;
@@ -67,16 +91,17 @@ public class ClassesServiceImpl implements ClassesService {
         ipText += '.' + currentIPv4[3].toString();
 
         getIpClass();
-        if (check == null) {
-            prefix = random.ints(0, 30)
-                    .findFirst().getAsInt();
-            ipPrefix = "/" + prefix.toString();
-        }
+//        if (!check) {
+//            prefix = random.ints(0, 30)
+//                    .findFirst().getAsInt();
+//            ipPrefix = "/" + prefix.toString();
+//        }
 
         numberOfHosts = Math.pow(2, 32 - prefix) - 2;
         ipText = ipText.substring(1);
 
         getNetMask();
+
         return ipText;
     }
 
@@ -188,7 +213,7 @@ public class ClassesServiceImpl implements ClassesService {
         str = invertStrBits(str);
         netAddrBin = mySubString(netAddrBin, 0, prefix);
         netAddrBin += str;
-        minAddr = bin2decAddr();
+        maxAddr = bin2decAddr();
 
         str = str.replace("0", "1");
         netAddrBin = mySubString(netAddrBin, 0, prefix);
@@ -208,4 +233,23 @@ public class ClassesServiceImpl implements ClassesService {
         return myString.substring(start, Math.min(start + length, myString.length()));
     }
 
+//-----------------------------------------------------------------------------------------
+//    @Override
+//    @Transactional
+    private String[] getAllValues() {
+        String[] arrayValues = new String[10];
+
+        arrayValues[0] = ipClass;
+        arrayValues[1] = ipNetmask;
+        arrayValues[2] = ipInverseMask;
+        arrayValues[3] = prefix.toString();
+        arrayValues[4] = netAddr;
+        arrayValues[5] = hostAddr;
+        arrayValues[6] = minAddr;
+        arrayValues[7] = maxAddr;
+        arrayValues[8] = broadcastingAddr;
+        arrayValues[9] = numberOfHosts.toString();
+
+        return arrayValues;
+    }
 }
