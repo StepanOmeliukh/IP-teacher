@@ -16,7 +16,7 @@
         <div class="container"><a class="navbar-brand" href="/">ip-teacher</a><button data-bs-toggle="collapse" data-bs-target="#navbarResponsive" class="navbar-toggler text-white bg-primary navbar-toggler-right text-uppercase rounded" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#portfolio">Profile</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/profile">Profile</a></li>
                     <li class="nav-item mx-0 mx-lg-1"></li>
                     <li class="nav-item mx-0 mx-lg-1"></li>
                 </ul>
@@ -32,10 +32,10 @@
                 </div>
                 <div class="col-md-6">
                     <input hidden id="check" name="check" value="">
-                    <button class="btn btn-primary" onclick="window.location.href ='/nets/classes/trainy/generate'">Generate IP</button>
+                    <button class="btn btn-primary" onclick="window.location.href ='/nets/classes/${class}/generate'">Generate IP!</button>
                 </div>
             </div>
-            <form style="border-radius: 15px;border: 2px solid rgb(0,0,0) ;" method="post" action="/nets/classes/trainy/check">
+            <form style="border-radius: 15px;border: 2px solid rgb(0,0,0) ;" method="post" action="/nets/classes/${class}/check">
                 <div class="row">
                     <div class="col">
                         <p style="margin-top: 10px;width: 200px;transform: translate(0px);margin-left: 80px;">Task 1</p>

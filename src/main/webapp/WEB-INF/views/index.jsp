@@ -32,7 +32,7 @@
             </div>
             <div class="col">
                 <div class="dropdown" style="color: rgb(44,62,80);"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="height: 80px;width: 250px;margin-left: 10px;color: rgb(44,62,80);font-size: 25px;background: rgb(229,231,230);border-radius: 10px;box-shadow: 2px 2px 10px 1px;"><strong>No Classes</strong>&nbsp;</button>
-                    <div class="dropdown-menu"><a class="dropdown-item" href="/ne">Theory</a><a class="dropdown-item" href="#">Trainy</a><a class="dropdown-item" href="#">Controll</a></div>
+                    <div class="dropdown-menu"><a class="dropdown-item" href="#">Theory</a><a class="dropdown-item" href="#">Trainy</a><a class="dropdown-item" href="#">Controll</a></div>
                 </div>
             </div>
             <div class="col">
