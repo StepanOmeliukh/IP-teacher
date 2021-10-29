@@ -1,6 +1,8 @@
 package org.example.model;
 
 import lombok.*;
+import org.example.model.util.Role;
+import org.example.model.util.Status;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -40,7 +42,23 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
-    @OneToMany(cascade = CascadeType.ALL,
-            mappedBy = "user")
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    @Column(name = "count_of_classes_control", columnDefinition = "int default 3")
+    private Integer CountClassesControl;
+
+    @Column(name = "count_of_no_classes_control", columnDefinition = "int default 3")
+    private Integer CountNoClassesControl;
+
+    @Column(name = "count_of_under_classes_control", columnDefinition = "int default 3")
+    private Integer CountUnderClassesControl;
+
+    @OneToMany(mappedBy = "user")
     private List<Test> tests;
 }

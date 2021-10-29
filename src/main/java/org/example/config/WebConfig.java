@@ -10,7 +10,12 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("org.example")
+@ComponentScan({
+        "org.example",
+        "org.example.model",
+        "org.example.repo",
+        "org.example.service"
+})
 public class WebConfig implements WebMvcConfigurer {
     @Bean
     public ViewResolver viewResolver() {

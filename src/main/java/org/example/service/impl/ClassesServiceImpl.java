@@ -2,23 +2,30 @@ package org.example.service.impl;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.example.dao.TestDAO;
+import org.example.dao.UserDAO;
+import org.example.model.Test;
+import org.example.model.User;
+import org.example.service.AllUseService;
 import org.example.service.ClassesService;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Random;
+import java.util.*;
 
 @Service
 @Getter
 @Setter
 public class ClassesServiceImpl implements ClassesService {
 
-//    @Autowired
-//    private ClassesRepo classesRepo;
+    @Autowired
+    private UserDAO userDAO;
+    @Autowired
+    private TestDAO testDAO;
+
+    @Autowired
+    private AllUseService allUseService;
 
     private Integer[] currentIPv4 = new Integer[4];
     private Integer prefix = 0;
@@ -91,11 +98,11 @@ public class ClassesServiceImpl implements ClassesService {
         ipText += '.' + currentIPv4[3].toString();
 
         getIpClass();
-//        if (!check) {
-//            prefix = random.ints(0, 30)
-//                    .findFirst().getAsInt();
-//            ipPrefix = "/" + prefix.toString();
-//        }
+        if (!check) {
+            prefix = random.ints(0, 30)
+                    .findFirst().getAsInt();
+            ipPrefix = "/" + prefix.toString();
+        }
 
         numberOfHosts = Math.pow(2, 32 - prefix) - 2;
         ipText = ipText.substring(1);
@@ -252,4 +259,24 @@ public class ClassesServiceImpl implements ClassesService {
 
         return arrayValues;
     }
+
+//-----------------------------------------------------------------------------------------
+
+    @Override
+    @Transactional
+    public Integer getCount() {
+        String email = allUseService.getCurrentUser();
+        return userDAO.getCountClasses(email);
+    }
+
+    public void saveTest(String result, String regime, String variety) {
+        Optional<User> user = userDAO.getUserByEmail(allUseService.getCurrentUser());
+        Test test = new Test();
+        test.setPoint(result);
+        test.setRegime(regime);
+        test.setVarietyTest(variety);
+        test.setUser(user.get());
+        testDAO.saveTest(test);
+    }
+
 }

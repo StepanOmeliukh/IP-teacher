@@ -19,17 +19,15 @@ public class Test {
     private Long id;
 
     @Column(name = "point")
-    private Integer point;
+    private String point;
 
     @Column(name = "regime")
     private String regime;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "test_id")
     @Column(name = "variety")
     private String varietyTest;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "user_id")
     private User user;
 
