@@ -1,4 +1,4 @@
-<%--<%@ taglib prefix="c" uri="https://java.sun.com/jsp/jstl/core" %>--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -16,8 +16,13 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/profile">Profile</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"></li>
-                    <li class="nav-item mx-0 mx-lg-1"></li>
+                    <c:if test="${user.role == 'USER' || user.role == 'ADMIN'}">
+                        <c:if test="${user.role == 'ADMIN'}">
+                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/admin">Admin</a></li>
+                        </c:if>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/auth/logout">Log Out</a></li>
+                    </c:if>
+
                 </ul>
             </div>
         </div>
@@ -32,12 +37,12 @@
             </div>
             <div class="col">
                 <div class="dropdown" style="color: rgb(44,62,80);"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="height: 80px;width: 250px;margin-left: 10px;color: rgb(44,62,80);font-size: 25px;background: rgb(229,231,230);border-radius: 10px;box-shadow: 2px 2px 10px 1px;"><strong>No Classes</strong>&nbsp;</button>
-                    <div class="dropdown-menu"><a class="dropdown-item" href="#">Theory</a><a class="dropdown-item" href="#">Trainy</a><a class="dropdown-item" href="#">Controll</a></div>
+                    <div class="dropdown-menu"><a class="dropdown-item" href="/nets/noclasses/theory">Theory</a><a class="dropdown-item" href="/nets/noclasses/trainy">Trainy</a><a class="dropdown-item" href="/nets/noclasses/control">Controll</a></div>
                 </div>
             </div>
             <div class="col">
                 <div class="dropdown" style="color: rgb(44,62,80);"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="height: 80px;width: 250px;margin-left: 10px;color: rgb(44,62,80);font-size: 25px;background: rgb(229,231,230);border-radius: 10px;box-shadow: 2px 2px 10px 1px;"><strong>Under Nets</strong>&nbsp;</button>
-                    <div class="dropdown-menu"><a class="dropdown-item" href="#">Theory</a><a class="dropdown-item" href="#">Trainy</a><a class="dropdown-item" href="#">Controll</a></div>
+                    <div class="dropdown-menu"><a class="dropdown-item" href="/nets/underclasses/theory">Theory</a><a class="dropdown-item" href="/nets/underclasses/trainy">Trainy</a><a class="dropdown-item" href="/nets/underclasses/control">Controll</a></div>
                 </div>
             </div>
         </div>
@@ -48,18 +53,30 @@
             <hr class="star-dark mb-5">
             <div class="row">
                 <div class="col-lg-8 mx-auto">
-                    <form id="contactForm" name="sentMessage" novalidate="novalidate" method="post" action="index.jsp">
+                    <form id="contactForm" name="sentMessage" novalidate="novalidate" method="post" action="/contact">
                         <div class="control-group">
-                            <div class="mb-0 form-floating controls pb-2"><input class="form-control" type="text" id="name" required="" placeholder="Name"><label class="form-label">Name</label><small class="form-text text-danger help-block"></small></div>
+                            <div class="mb-0 form-floating controls pb-2">
+                                <input class="form-control" type="text" id="name" name="name" placeholder="Name">
+                                <label class="form-label">Name</label><small class="form-text text-danger help-block"></small>
+                            </div>
                         </div>
                         <div class="control-group">
-                            <div class="mb-0 form-floating controls pb-2"><input class="form-control" type="email" id="email" required="" placeholder="Email Address"><label class="form-label">Email Address</label><small class="form-text text-danger help-block"></small></div>
+                            <div class="mb-0 form-floating controls pb-2">
+                                <input class="form-control" type="email" id="email" name="email" placeholder="Email Address">
+                                <label class="form-label">Email Address</label><small class="form-text text-danger help-block"></small>
+                            </div>
                         </div>
                         <div class="control-group">
-                            <div class="mb-0 form-floating controls pb-2"><input class="form-control" type="tel" id="phone" required="" placeholder="Phone Number"><label class="form-label">Phone Number</label><small class="form-text text-danger help-block"></small></div>
+                            <div class="mb-0 form-floating controls pb-2">
+                                <input class="form-control" type="tel" id="phone" name="phone" placeholder="Phone Number">
+                                <label class="form-label">Phone Number</label><small class="form-text text-danger help-block"></small>
+                            </div>
                         </div>
                         <div class="control-group">
-                            <div class="mb-5 form-floating controls pb-2"><textarea class="form-control" id="message" required="" placeholder="Message" style="height: 150px;"></textarea><label class="form-label">Message</label><small class="form-text text-danger help-block"></small></div>
+                            <div class="mb-5 form-floating controls pb-2">
+                                <textarea class="form-control" id="message" name="message" placeholder="Message" style="height: 150px;"></textarea>
+                                <label class="form-label">Message</label><small class="form-text text-danger help-block"></small>
+                            </div>
                         </div>
                         <div id="success"></div>
                         <div><button class="btn btn-primary btn-xl" id="sendMessageButton" type="submit">Send</button></div>

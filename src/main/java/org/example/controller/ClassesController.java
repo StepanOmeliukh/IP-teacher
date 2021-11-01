@@ -20,7 +20,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/nets/classes")
-public class CLassesController {
+public class ClassesController {
 
     @Autowired
     private UserDAO userDAO;
@@ -31,7 +31,7 @@ public class CLassesController {
     private AllUseService allUseService;
 
     private String ip = "";
-    String result = "";
+    private String result = "";
 
     @RequestMapping("/theory")
     public String theory() {
@@ -68,13 +68,17 @@ public class CLassesController {
                                @RequestParam(required = false, name = "task9") String task9,
                                @RequestParam(required = false, name = "task10") String task10) {
         String[] taskArray = {task1, task2, task3, task4, task5, task6, task7, task8, task9, task10};
+        if (ip.isEmpty())
+            return "redirect:/nets/classes/trainy";
+
         result = classesService.checkAnswers(taskArray);
+        ip = "";
 
         return "redirect:/nets/classes/trainy";
     }
 
     @RequestMapping("/control")
-    public String classes(Model model) {
+    public String control(Model model) {
         if (!ip.equals(""))
             model.addAttribute("ip", ip);
         if (!result.equals(""))
@@ -86,7 +90,7 @@ public class CLassesController {
 
     @RequestMapping("/control/generate")
     public String controlAction(Model model) {
-        Integer count = classesService.getCount();
+        Integer count = classesService.getCount(VarietyTests.CLASSES.name());
 
         if (count <= 0) {
             ip = "You have any tries!";
@@ -110,16 +114,21 @@ public class CLassesController {
                                @RequestParam(required = false, name = "task7") String task7,
                                @RequestParam(required = false, name = "task8") String task8,
                                @RequestParam(required = false, name = "task9") String task9,
-                               @RequestParam(required = false, name = "task10") String task10) {
+                               @RequestParam(required = false, name = "task10") String task10,
+                               @RequestParam(required = false, name = "time") Integer time) {
         String[] taskArray = {task1, task2, task3, task4, task5, task6, task7, task8, task9, task10};
         result = classesService.checkAnswers(taskArray);
         String regime = Regime.CONTROL.name();
         String vareity = VarietyTests.CLASSES.name();
 
+        if (ip.isEmpty())
+            return "redirect:/nets/classes/control";
+
         if (ip.equals("You have any tries!"))
             return "redirect:/nets/classes/control";
 
-        classesService.saveTest(result, regime, vareity);
+        classesService.saveTest(result, regime, vareity, time);
+        ip = "";
 
         return "redirect:/nets/classes/control";
     }

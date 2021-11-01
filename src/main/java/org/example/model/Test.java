@@ -27,8 +27,10 @@ public class Test {
     @Column(name = "variety")
     private String varietyTest;
 
+    @Column(name = "time")
+    private Integer time;
+
     @ManyToOne()
     @JoinColumn(name = "user_id")
     private User user;
-
 }

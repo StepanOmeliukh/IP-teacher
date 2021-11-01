@@ -13,7 +13,7 @@ public interface UserService {
 
     User getUserByEmail(String email);
 
-//    List<User> getAllUsers();
+    List<User> getAllUsers(String email);
 
-//    void deleteUser(Long id);
+    void updateClass(Integer c, Integer nc, Integer uc, Long id); //Довго писати скорочення classes..
 }

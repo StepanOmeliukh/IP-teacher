@@ -15,8 +15,12 @@ public interface UserDAO {
 
     Optional<User> getUserByEmail(String email);
 
-    Integer getCountClasses(String email);
+    Integer getCountClasses(String email, String clas);
 
     void subtractCount(String email);
+
+    List<User> getAllUsers(String email);
+
+    void updateClass(Integer c, Integer nc, Integer uc, Long id);
 }
 

@@ -13,7 +13,6 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @ComponentScan({
         "org.example",
         "org.example.model",
-        "org.example.repo",
         "org.example.service"
 })
 public class WebConfig implements WebMvcConfigurer {

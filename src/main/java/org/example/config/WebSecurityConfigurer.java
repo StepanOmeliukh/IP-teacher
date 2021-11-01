@@ -26,7 +26,7 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
 
-    @Autowired   //??????
+    @Autowired
     public WebSecurityConfigurer(@Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
@@ -47,7 +47,8 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/auth/success", true)
                 .and()
                 .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout", "POST"))
+                .logoutUrl("/auth/logout")
+//                .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout", "POST"))
                 .invalidateHttpSession(true)
                 .clearAuthentication(true)
                 .deleteCookies("JSESSIONID")

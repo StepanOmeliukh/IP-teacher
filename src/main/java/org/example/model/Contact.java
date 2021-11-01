@@ -22,7 +22,7 @@ public class Contact {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Pattern(regexp = "^[A-Za-z]\\\\w{2,29}$")
+    @Pattern(regexp = "^[A-Za-z]{2,29}$")
     @Column(name = "name")
     private String name;
 
@@ -37,4 +37,8 @@ public class Contact {
 
     @Column(name = "message")
     private String message;
+
+    @ManyToOne()
+    @JoinColumn(name = "user_id")
+    private User user;
 }

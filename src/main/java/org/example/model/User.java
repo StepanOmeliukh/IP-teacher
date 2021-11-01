@@ -50,15 +50,18 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @Column(name = "count_of_classes_control", columnDefinition = "int default 3")
-    private Integer CountClassesControl;
+    @Column(name = "count_of_classes_control")
+    private Integer CountClassesControl = 3;
 
-    @Column(name = "count_of_no_classes_control", columnDefinition = "int default 3")
-    private Integer CountNoClassesControl;
+    @Column(name = "count_of_no_classes_control")
+    private Integer CountNoClassesControl = 3;
 
-    @Column(name = "count_of_under_classes_control", columnDefinition = "int default 3")
-    private Integer CountUnderClassesControl;
+    @Column(name = "count_of_under_classes_control")
+    private Integer CountUnderClassesControl = 3;
 
     @OneToMany(mappedBy = "user")
     private List<Test> tests;
+
+    @OneToMany(mappedBy = "user")
+    private List<Contact> contacts;
 }

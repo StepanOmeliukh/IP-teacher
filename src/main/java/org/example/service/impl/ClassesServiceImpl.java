@@ -45,7 +45,7 @@ public class ClassesServiceImpl implements ClassesService {
     private String maxAddr = "";
     private String broadcastingAddr = "";
 
-    private static final Integer maxRate = 10;
+    private static Integer maxRate;
 
     @Override
     @Transactional
@@ -56,8 +56,13 @@ public class ClassesServiceImpl implements ClassesService {
     @Override
     @Transactional
     public String checkAnswers(String[] taskArray) {
-        String[] values = getAllValues();
+        String[] values = new String[taskArray.length];
+        if (taskArray.length == 10)
+            values = getAllValues();
+        else if (taskArray.length == 8)
+            values = getNoClassValues();
         Integer rate = 0;
+        maxRate = taskArray.length;
 
         for (int i = 0; i < taskArray.length; i++)
             if (taskArray[i].equals(values[i]))
@@ -260,22 +265,38 @@ public class ClassesServiceImpl implements ClassesService {
         return arrayValues;
     }
 
+    private String[] getNoClassValues() {
+        String[] arrayValues = new String[8];
+
+        arrayValues[0] = ipNetmask;
+        arrayValues[1] = ipInverseMask;
+        arrayValues[2] = netAddr;
+        arrayValues[3] = hostAddr;
+        arrayValues[4] = minAddr;
+        arrayValues[5] = maxAddr;
+        arrayValues[6] = broadcastingAddr;
+        arrayValues[7] = numberOfHosts.toString();
+
+        return arrayValues;
+    }
+
 //-----------------------------------------------------------------------------------------
 
     @Override
     @Transactional
-    public Integer getCount() {
+    public Integer getCount(String clas) {
         String email = allUseService.getCurrentUser();
-        return userDAO.getCountClasses(email);
+        return userDAO.getCountClasses(email, clas);
     }
 
-    public void saveTest(String result, String regime, String variety) {
+    public void saveTest(String result, String regime, String variety, Integer time) {
         Optional<User> user = userDAO.getUserByEmail(allUseService.getCurrentUser());
         Test test = new Test();
         test.setPoint(result);
         test.setRegime(regime);
         test.setVarietyTest(variety);
         test.setUser(user.get());
+        test.setTime(time);
         testDAO.saveTest(test);
     }
 

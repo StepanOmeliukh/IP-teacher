@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--<!DOCTYPE html>--%>
 <html>
 
@@ -13,10 +14,10 @@
 
 <body id="page-top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="72">
     <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-secondary text-uppercase" id="mainNav">
-        <div class="container"><a class="navbar-brand" href="#page-top">IP-Teacher</a><button data-bs-toggle="collapse" data-bs-target="#navbarResponsive" class="navbar-toggler text-white bg-primary navbar-toggler-right text-uppercase rounded" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+        <div class="container"><a class="navbar-brand" href="/">IP-Teacher</a><button data-bs-toggle="collapse" data-bs-target="#navbarResponsive" class="navbar-toggler text-white bg-primary navbar-toggler-right text-uppercase rounded" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#portfolio">Admin</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/admin">Admin</a></li>
                     <li class="nav-item mx-0 mx-lg-1"></li>
                     <li class="nav-item mx-0 mx-lg-1"></li>
                 </ul>
@@ -24,9 +25,9 @@
         </div>
     </nav>
     <header class="text-center text-white bg-primary masthead">
-        <div class="container"><img class="img-fluid d-block mx-auto mb-5" src="../../../../../../IP-Teacher%20Bootstrap/Admin/assets/img/profile.png">
-            <h1>John Doe</h1>
-            <h1 style="font-size: 20px;">admin.mail@gmail.com</h1>
+        <div class="container"><img class="img-fluid d-block mx-auto mb-5" src="${pageContext.request.contextPath}/resources/img/profile.png">
+            <h1>${firstName} ${lastName}</h1>
+            <h1 style="font-size: 20px;">${email}</h1>
             <hr class="star-light">
             <h2 class="font-weight-light mb-0">Admin</h2>
         </div>
@@ -35,9 +36,6 @@
         <div class="container">
             <h2 class="text-uppercase text-center text-secondary">Users</h2>
             <hr class="star-dark mb-5">
-            <div class="row">
-                <div class="col"><input type="search" style="transform: translate(0px);width: 300px;" placeholder="Users search..."><i class="fa fa-search" style="transform: translate(-25px);"></i></div>
-            </div>
         </div>
         <div class="col" style="margin-top: 20px;">
             <div class="table-responsive">
@@ -47,25 +45,30 @@
                             <th>Id</th>
                             <th style="width: 300px;">User's mail</th>
                             <th>User's name</th>
-                            <th>User's tries</th>
+                            <th>User's classes tries</th>
+                            <th>User's no classes tries</th>
+                            <th>User's under classes tries</th>
+                            <th>Update tries</th>
                         </tr>
                     </thead>
                     <tbody>
+                    <c:forEach varStatus="count" var="users" items="${user}">
                         <tr>
-                            <td>1</td>
-                            <td>admin.mail@gmail.com</td>
-                            <td>John Doe</td>
-                            <td><input type="text"></td>
+                            <form action="/admin/update">
+                                <td>${count.count}</td>
+                                <td>${users.email}</td>
+                                <td>${users.firstName} ${users.lastName}</td>
+                                <td><input type="text" placeholder="${users.countClassesControl}" name="classes" value="${users.countClassesControl}"></td>
+                                <td><input type="text" placeholder="${users.countNoClassesControl}" name="noclasses" value="${users.countNoClassesControl}"></td>
+                                <td><input type="text" placeholder="${users.countUnderClassesControl}" name="underclasses" value="${users.countUnderClassesControl}"></td>
+                                <td><input type="text" value="${users.id}" name="id" hidden></td>
+                                <td><button type="submit">Update</button></td>
+                            </form>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>stepan.omeliukh.knm.2019@lpnu.ua</td>
-                            <td>Stepan Omeliukh</td>
-                            <td><input type="text"></td>
-                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
-            </div><a class="btn btn-outline-light btn-xl" role="button" href="#" style="background: rgb(24,188,156);text-align: center;margin-left: 40%;"><i class="fa fa-plus me-2"></i><span>Add tries</span></a>
+            </div>
         </div>
     </section>
     <div class="text-center text-white copyright py-4">

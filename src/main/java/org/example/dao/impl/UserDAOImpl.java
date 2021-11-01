@@ -1,9 +1,10 @@
 package org.example.dao.impl;
 
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.example.dao.UserDAO;
+import org.example.model.Test;
 import org.example.model.User;
+import org.example.model.util.VarietyTests;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -11,7 +12,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
+//import javax.persistence.Query;
 import java.util.List;
 import java.util.Optional;
 
@@ -78,16 +79,31 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public Integer getCountClasses(String email) {
+    public Integer getCountClasses(String email, String clas) {
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
 
+        Integer result = 0;
 
+        if (clas.equals(VarietyTests.CLASSES.name())) {
+            Query query1 = session.createNativeQuery("select count_of_classes_control from users\n" +
+                    "where email = :email");
+            query1.setParameter("email", email);
+            result = (Integer) query1.getSingleResult();
+        } else if (clas.equals(VarietyTests.NOCLASSES.name())) {
+            Query query1 = session.createNativeQuery("select count_of_no_classes_control from users\n" +
+                    "where email = :email");
+            query1.setParameter("email", email);
+            result = (Integer) query1.getSingleResult();
+        } else if (clas.equals(VarietyTests.UNDERCLASSES.name())) {
+            Query query1 = session.createNativeQuery("select count_of_under_classes_control from users\n" +
+                    "where email = :email");
+            query1.setParameter("email", email);
+            result = (Integer) query1.getSingleResult();
+        }
 
-        Query query1 = session.createNativeQuery("select count_of_classes_control from users\n" +
-                "where email = :email");
-        query1.setParameter("email", email);
-        Integer result = (Integer) query1.getSingleResult();
+        if (result == null)
+            result = 0;
         transaction.commit();
 
         return result;
@@ -109,4 +125,36 @@ public class UserDAOImpl implements UserDAO {
         transaction.commit();
     }
 
+    @Override
+    public List<User> getAllUsers(String email) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+
+        Query query = session.createNativeQuery("select * from users u\n" +
+                "where u.email != :email", User.class);
+        query.setParameter("email", email);
+
+        List<User> result = query.getResultList();
+        transaction.commit();
+        return result;
+    }
+
+    @Override
+    public void updateClass(Integer c, Integer nc, Integer uc, Long id) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+
+        Query query = session.createNativeQuery("update users u\n" +
+                "set u.count_of_classes_control = :c,\n" +
+                "    u.count_of_no_classes_control = :nc,\n" +
+                "    u.count_of_under_classes_control = :uc\n" +
+                "where id = :id");
+        query.setParameter("c", c);
+        query.setParameter("nc", nc);
+        query.setParameter("uc", uc);
+        query.setParameter("id", id);
+
+        query.executeUpdate();
+        transaction.commit();
+    }
 }

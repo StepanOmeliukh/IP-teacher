@@ -20,11 +20,6 @@ public class UserServiceImpl implements UserService {
 
     private final UserDAO userDAO;
 
-//    @Override
-//    public List<User> getAllUsers() {
-//        return userDAO.getAllUsers();
-//    }
-
     @Override
     public boolean addUser(User user) {
         Optional<User> userDB = userDAO.getUserByEmail(user.getEmail());
@@ -50,9 +45,14 @@ public class UserServiceImpl implements UserService {
         return userDAO.getUserByEmail(email).orElse(null);
     }
 
-//    @Override
-//    public void deleteUser(Long id) {
-//        userDAO.deleteUser(id);
-//    }
+    @Override
+    public List<User> getAllUsers(String email) {
+        return userDAO.getAllUsers(email);
+    }
+
+    @Override
+    public void updateClass(Integer c, Integer nc, Integer uc, Long id) {
+        userDAO.updateClass(c, nc, uc, id);
+    }
 
 }
