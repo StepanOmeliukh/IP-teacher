@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Locale;
+
 @Controller
 @RequestMapping("/nets/noclasses")
 public class NoClassesController {
@@ -26,9 +28,16 @@ public class NoClassesController {
     private String ip = "";
     String result = "";
 
+    // тут опис режиму
+    private String content = "B";
+
     @RequestMapping("/theory")
-    public String theory() {
-        return "";
+    public String theory(Model model) {
+        model.addAttribute("class", VarietyTests.NOCLASSES.name());
+        model.addAttribute("content", content);
+        model.addAttribute("classorig", VarietyTests.NOCLASSES.name().toLowerCase(Locale.ROOT));
+
+        return "theory";
     }
 
     @RequestMapping("/trainy")

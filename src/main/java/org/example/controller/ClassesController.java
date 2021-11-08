@@ -1,8 +1,5 @@
 package org.example.controller;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.example.dao.UserDAO;
 import org.example.model.util.Regime;
 import org.example.model.util.VarietyTests;
@@ -11,12 +8,10 @@ import org.example.service.ClassesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
+import java.util.Locale;
 
 @Controller
 @RequestMapping("/nets/classes")
@@ -33,9 +28,16 @@ public class ClassesController {
     private String ip = "";
     private String result = "";
 
+    // тут опис режиму
+    private String content = "A";
+
     @RequestMapping("/theory")
-    public String theory() {
-        return "";
+    public String theory(Model model) {
+        model.addAttribute("class", VarietyTests.CLASSES.name());
+        model.addAttribute("content", content);
+        model.addAttribute("classorig", VarietyTests.CLASSES.name().toLowerCase(Locale.ROOT));
+
+        return "theory";
     }
 
     @RequestMapping("/trainy")
